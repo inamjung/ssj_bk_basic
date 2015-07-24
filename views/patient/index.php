@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use kartik\dynagrid\DynaGrid;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
+use app\models\Patient;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PatientSearch */
@@ -85,10 +86,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template'=>'<div class="btn-group btn-group-sm" role="group" aria-label="...">{view}{update}</div>',
                 'buttons'=>[
                     'view'=>function($url,$model,$key){
-                        return Html::a('<i class="glyphicon glyphicon-eye-open"></i>',$url,['class'=>'btn btn-default']);
+                        return Html::a('<i class="glyphicon glyphicon-search"> ดู</i>',$url,['class'=>'btn btn-info']);
                     }, 
-                    'update'=>function($url,$model,$key){
-                        return Html::a('<i class="glyphicon glyphicon-pencil"></i>',$url,['class'=>'btn btn-default']);
+                    'update'=>function($url,$model,$key){                        
+                        return  Html::a('<i class="glyphicon glyphicon-pencil"></i> แก้ไข', $url, ['class' => 'btn btn-success']);
+                    
                     },
 //                    'delete'=>function($url,$model,$key){
 //                         return Html::a('<i class="glyphicon glyphicon-trash"></i>', $url,[

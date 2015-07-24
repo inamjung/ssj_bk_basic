@@ -14,6 +14,7 @@ use app\models\Ctambon;
 use app\models\Campur;
 
 use yii\helpers\Json;
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -66,7 +67,7 @@ class PatientController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate1()
     {
         $model = new Patient();
 

@@ -7,6 +7,13 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
+        'view' => [
+         'theme' => [
+             'pathMap' => [
+                '@app/views' => '@app/themes/adminlte'
+                    ],
+                ],
+            ],        
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'wz6Q-JnxyR45RyFIB1xyyJOQusC8f4wU',
@@ -38,6 +45,17 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        
+        'db2' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=hos;port=3306',
+            'username' => 'sa',
+            'password' => 'sa',
+            'charset' => 'utf8',
+            'attributes' => array(
+                PDO::MYSQL_ATTR_LOCAL_INFILE => true
+            ),
+        ],
     ],
     'modules' => [
         'dynagrid' => [

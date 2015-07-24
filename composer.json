@@ -30,7 +30,8 @@
         "scotthuangzl/yii2-google-chart": "dev-master",
         "miloschuman/yii2-highcharts-widget": "dev-master",
         "kartik-v/yii2-export": "*",
-        "kartik-v/yii2-mpdf": "*"
+        "kartik-v/yii2-mpdf": "*",
+        "dmstr/yii2-adminlte-asset": "2.*"
         
     },
     "require-dev": {
