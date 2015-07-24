@@ -5,9 +5,53 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use yii\data\ArrayDataProvider;
+use yii\filters\AccessControl;
+use app\components\AccessRule;
+use app\models\User;
+
 class ReportController extends Controller {
+    
     public $enableCsrfValidation = false;
     
+     public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['post'],
+                ],
+            ],
+            
+            'access'=>[
+                'class'=>AccessControl::className(),
+                'only'=> ['report','report1'],
+                'ruleConfig'=>[
+                    'class'=>AccessRule::className()
+                ],
+                'rules'=>[
+                    [
+                        'actions'=>['report'],
+                        'allow'=> true,
+                        'roles'=>[
+                            User::ROLE_USER,
+                            User::ROLE_MODERATOR,
+                            User::ROLE_ADMIN
+
+                        ]
+                    ],
+                    [
+                        'actions'=>['report1'],
+                        'allow'=> true,
+                        'roles'=>[
+                            User::ROLE_MODERATOR,
+                            User::ROLE_ADMIN
+                        ]
+                    ],                   
+                ]
+            ]
+        ];
+    }
     public function actionReport(){
         
         $connection = Yii::$app->db2;

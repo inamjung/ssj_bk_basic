@@ -8,6 +8,9 @@ use app\models\PatientSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+//use yii\filters\AccessControl;
+//use app\components\AccessRule;
+//use app\models\User;
 
 use yii\helpers\ArrayHelper;
 use app\models\Ctambon;
@@ -23,17 +26,6 @@ use yii\helpers\Url;
  */
 class PatientController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Patient models.
@@ -67,7 +59,7 @@ class PatientController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate1()
+    public function actionCreate()
     {
         $model = new Patient();
 
