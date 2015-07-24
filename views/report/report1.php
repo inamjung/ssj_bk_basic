@@ -77,12 +77,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'type' => \kartik\grid\GridView::TYPE_SUCCESS,        
     ],    
     'columns' => [
-        ['class'=>'kartik\grid\SerialColumn'],
+        //['class'=>'kartik\grid\SerialColumn'],
 
-           [
-               'label'=>'ปี',
-               'attribute'=>'yy'
-           ],
+//           [
+//               'label'=>'ปี',
+//               'attribute'=>'yy'
+//           ],
             [
                   'label'=>'เดือน',
                   'attribute'=>'mm'

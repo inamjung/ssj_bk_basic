@@ -31,7 +31,8 @@
         "miloschuman/yii2-highcharts-widget": "dev-master",
         "kartik-v/yii2-export": "*",
         "kartik-v/yii2-mpdf": "*",
-        "dmstr/yii2-adminlte-asset": "2.*"
+        "dmstr/yii2-adminlte-asset": "2.*",
+        "dektrium/yii2-user": "0.9.*@dev"
         
     },
     "require-dev": {
