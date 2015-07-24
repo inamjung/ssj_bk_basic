@@ -20,14 +20,12 @@ class ReportController extends Controller {
             ORDER BY yy')->queryAll();
         
         //เตรียมข้อมูลส่งให้กราฟ
-//        for($i=0;$i<sizeof($data);$i++){
-//            $clinicname[] = $data[$i]['clinicname'];           
-//            $a[] = $data[$i]['a']*1;
-//            $b[] = $data[$i]['b']*1;
-//            $c[] = $data[$i]['c']*1;
-//            $d[] = $data[$i]['d']*1;
-//            $e[] = $data[$i]['e']*1;
-//        }
+        for($i=0;$i<sizeof($data);$i++){
+            $yy[] = $data[$i]['yy'];           
+            $mm[] = $data[$i]['mm'];
+            $cn[] = $data[$i]['cn']*1;
+
+        }
         
        $dataProvider = new ArrayDataProvider([
             'allModels'=>$data,
@@ -35,7 +33,43 @@ class ReportController extends Controller {
         ]);
         return $this->render('report',[
             'dataProvider'=>$dataProvider,
-            //'clinicname'=>$clinicname,'a'=>$a,'b'=>$b,'c'=>$c,'d'=>$d,'e'=>$e,
+            'yy'=>$yy,
+            'mm'=>$mm,
+            'cn'=>$cn
+            
          ]);
         }
+        
+       public function actionReport1(){
+        $date1 = "";
+        $date2 = "";    
+        if (Yii::$app->request->isPost) {
+            $date1 = $_POST['date1'];
+            $date2 = $_POST['date2'];
+        }
+        
+        $sql = "SELECT YEAR(dchdate)as yy,
+            MONTH(dchdate)as mm,
+            COUNT(an) as cn
+            from an_stat
+            where dchdate BETWEEN '$date1' AND '$date2'
+            GROUP BY yy,mm
+            ORDER BY yy";
+        try {
+            $rawData = \Yii::$app->db2->createCommand($sql)->queryAll();
+        } catch (\yii\db\Exception $e) {
+            throw new \yii\web\ConflictHttpException('sql error');
+        }
+       $dataProvider = new ArrayDataProvider([
+            'allModels'=>$rawData,
+            
+        ]);
+        return $this->render('report1',[
+            'dataProvider'=>$dataProvider,
+            'sql'=>$sql,
+            'date1' => $date1,
+            'date2' => $date2,   
+            
+         ]);
+        } 
     }

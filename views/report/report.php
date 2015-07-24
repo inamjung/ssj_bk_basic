@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use kartik\dynagrid\DynaGrid;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
+use miloschuman\highcharts\Highcharts;
 
 
 /* @var $this yii\web\View */
@@ -14,15 +15,30 @@ use yii\widgets\Pjax;
 $this->title = 'จำนวนผู้ป่วยในรายเดือน';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="patient-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-<!--    <p>
-        <?= Html::a(' <i class="glyphicon glyphicon-plus"></i> เพิ่มผู้ป่วยรายใหม่', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>-->
-    <?php Pjax::begin();?> 
+ <h3><?= Html::encode($this->title) ?></h3>
+   
+    <?php 
+    echo Highcharts::widget([
+    'options'=>[        
+        'title'=>['text'=>'จำนวนผู้ป่วยในรายเดือนปี2558'],
+        'xAxis'=>[
+            'categories'=>$mm
+        ],
+        'yAxis'=>[
+            'title'=>['text'=>'จำนวน(คน)']
+        ],
+        'series'=>[
+            [               
+                'type'=>'pie',
+                'name'=>'จำนวน',
+                'data'=>$cn,
+            ],
+            
+        ]
+    ]
+]);?>
+    
     
     <?php echo \kartik\grid\GridView::widget([
     'dataProvider' => $dataProvider,
@@ -53,6 +69,5 @@ $this->params['breadcrumbs'][] = $this->title;
 ]);
 ?>  
 
-<?php Pjax::end();?>
 
 </div>          
