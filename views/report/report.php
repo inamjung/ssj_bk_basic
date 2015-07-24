@@ -13,6 +13,7 @@ use miloschuman\highcharts\Highcharts;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'จำนวนผู้ป่วยในรายเดือน';
+$this->params['breadcrumbs'][] = ['label' => 'รายงานHOS', 'url' => ['report/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

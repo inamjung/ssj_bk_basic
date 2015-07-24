@@ -13,7 +13,7 @@ use yii\helpers\Url;
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p>ไอน้ำ</p>
+                <p></p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -24,20 +24,17 @@ use yii\helpers\Url;
 
             <li class="header"><h5><div class="label label-default"> เมนู</div></h5></li>
             
-          
-            <li><a href="<?php echo Url::to(['patient/index']); ?>"><i class="fa fa-circle text-green"></i> <span> ผูป่วย</span> <small class="label pull-right bg-blue"></small></a> </li>
+          <?php if (!Yii::$app->user->isGuest) { ?>
+            <li><a href="<?php echo Url::to(['patient/index']); ?>"><i class="fa fa-circle text-green"></i> <span> ผู้ป่วย</span> <small class="label pull-right bg-blue"></small></a> </li>
             <li><a href="<?php echo Url::to(['patient/create']); ?>"><i class="fa fa-circle text-aqua"></i> <span> เพิ่มผู้ป่วยรายใหม่</span><small class="label pull-right bg-red"></small></a></li>           
-            
+          <?php } ?>  
            
-                <li><a href="<?php echo Url::to(['report/report']); ?>">
-                        <i class="fa fa-circle text-orange"></i> <span> จำนวนผู้ป่วยใน</span> 
+                <li><a href="<?php echo Url::to(['report/index']); ?>">
+                        <i class="fa fa-circle text-orange"></i> <span> รายงาน HOSxP</span> 
                         <small class="label pull-right bg-aqua"></small></a>
                 </li>
             
-                <li><a href="<?php echo Url::to(['report/report1']); ?>">
-                        <i class="fa fa-circle text-red"></i> <span> จำนวนผู้ป่วยตามช่วงวันที่</span> 
-                        <small class="label pull-right bg-aqua"></small></a>
-                </li>
+             
             
                   
         

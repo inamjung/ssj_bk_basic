@@ -25,13 +25,13 @@ class ReportController extends Controller {
             
             'access'=>[
                 'class'=>AccessControl::className(),
-                'only'=> ['report','report1'],
+                'only'=> ['index','report','report1'],
                 'ruleConfig'=>[
                     'class'=>AccessRule::className()
                 ],
                 'rules'=>[
                     [
-                        'actions'=>['report'],
+                        'actions'=>['index','report'],
                         'allow'=> true,
                         'roles'=>[
                             User::ROLE_USER,
@@ -41,7 +41,7 @@ class ReportController extends Controller {
                         ]
                     ],
                     [
-                        'actions'=>['report1'],
+                        'actions'=>['index','report1'],
                         'allow'=> true,
                         'roles'=>[
                             User::ROLE_MODERATOR,
@@ -52,6 +52,34 @@ class ReportController extends Controller {
             ]
         ];
     }
+    public function actionIndex()
+    {
+        $connection = Yii::$app->db2;
+        $data = $connection->createCommand('
+           SELECT 
+            CONCAT(month(v.vstdate),"-",year(v.vstdate)+543) as ym
+            ,count(( v.vn) ) as total
+             FROM vn_stat v
+            WHERE v.vstdate BETWEEN "2014-10-01" and "2015-09-30"
+            GROUP BY year(v.vstdate),month(v.vstdate)
+            ')->queryAll();
+        //เตรียมข้อมูลส่งให้กราฟ
+        for($i=0;$i<sizeof($data);$i++){
+            $ym[] = $data[$i]['ym'];           
+            $total[] = $data[$i]['total']*1;    
+        }
+        
+        $dataProvider = new ArrayDataProvider([
+            'allModels'=>$data,
+
+        ]);
+        return $this->render('index',[
+            'dataProvider'=>$dataProvider,
+            'ym'=>$ym,'total'=>$total
+        ]);
+    
+    }
+
     public function actionReport(){
         
         $connection = Yii::$app->db2;

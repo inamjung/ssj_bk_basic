@@ -12,7 +12,8 @@ use miloschuman\highcharts\Highcharts;
 /* @var $searchModel app\models\PatientSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'จำนวนผู้ป่วยในรายเดือน';
+$this->title = 'จำนวนผู้ป่วยในรายเดือนตามช่วงวันที่';
+$this->params['breadcrumbs'][] = ['label' => 'รายงานHOS', 'url' => ['report/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
